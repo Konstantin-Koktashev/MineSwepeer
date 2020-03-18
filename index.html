@@ -12,14 +12,24 @@
       <div class="header">
         <h1>Welcome To Minesweeper</h1>
         <div class="secondHeader">
-          <button class="hints" onclick="activateHintMode()">
-            You Have: <span></span> Hints Left
-          </button>
+          <div class="hints">
+            <span onclick="activateHintMode()" class="hint">💡</span>
+            <span onclick="activateHintMode()" class="hint">💡</span>
+            <span onclick="activateHintMode()" class="hint">💡</span>
+          </div>
           <button class="safe" onclick="safeClick()">
-            You Have: <span></span> safe clicks Left
+            SAFE CLICK
           </button>
-          <button class="lives">You Have: <span></span> Lives Left</button>
-          <button class="backUp" onclick="stepBack()">stepBack</button>
+          <div class="lives">
+            <span  class="hint">❤️</span>
+            <span class="hint">❤️</span>
+            <span  class="hint">❤️</span>
+          </div>
+          <!-- <button class="lives">You Have: <span></span> Lives Left</button> -->
+          <button class="backUp" onclick="stepBack()">
+            <!-- <img src="/sweeperRedoMvc/images/back.png" alt=""> -->
+            StepBack
+          </button>
         </div>
         <div class="levels">
           <button class="manual" onclick="manualMode()">
