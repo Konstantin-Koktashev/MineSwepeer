@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body onload="onInit()">
+    <div class="main">
+      <div class="header">
+        <h1>Welcome To Minesweeper</h1>
+        <div class="secondHeader">
+          <button class="hints" onclick="activateHintMode()">
+            You Have: <span></span> Hints Left
+          </button>
+          <button class="safe" onclick="safeClick()">
+            You Have: <span></span> safe clicks Left
+          </button>
+          <button class="lives">You Have: <span></span> Lives Left</button>
+          <button class="backUp" onclick="stepBack()">stepBack</button>
+        </div>
+        <div class="levels">
+          <button class="manual" onclick="manualMode()">
+            Manual Mode
+          </button>
+          <button class="level" onclick="easyMode()">Easy Mode</button>
+          <button class="level" onclick="hardMode()">Hard Mode</button>
+          <button class="level" onclick="expertMode()">EXPERT</button>
+        </div>
+      </div>
+      <div class="main-Game-Body">
+        <!-- <button class="icon" onclick="restartLevel()"></button> -->
+        <div class="bcg-img">
+          <img
+            src="/sweeperRedoMvc/images/uncertain.png"
+            class="emoticon uncertain"
+          />
+          <img src="/sweeperRedoMvc/images/win2.jpg" class="emoticon win" />
+          <img src="/sweeperRedoMvc/images/lose3.png" class="emoticon lose" />
+        </div>
+        <div class="container"></div>
+      </div>
+      <div class="footer">
+        <div class="timer" onclick="timer()">
+          Your Score: <span class="stopwatch"></span> Best Score At Difficulty
+          <span class="difficulty"></span> is: <span class="results"></span>
+        </div>
+      </div>
+    </div>
+    <script src="js/services.js"></script>
+    <script src="js/model.js"></script>
+    <script src="js/clock.js"></script>
+  </body>
+</html>
