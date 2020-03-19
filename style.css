@@ -37,6 +37,7 @@ background-repeat: no-repeat;
   /* font-family: 'Libre Baskerville', serif; */
   font-family: 'Lemon', cursive;
 }
+
 .secondHeader {
   display: flex;
   flex-direction: row;
