@@ -6,6 +6,8 @@
 
 function onInit() {
   renderBoard(gBoard);
+  renderLives();
+  renderHints();
   setProperDimensions();
   updateStats();
   updateGlobalBestScores();
@@ -34,7 +36,7 @@ function cellClicked(elCell, i, j) {
   if (!getStats().livesLeft || !gGame.isOn) return;
   if (isHintMode) {
     deactivateHintMode();
-    RenderHints(pos);
+    displayHints(pos);
     updateStats();
     return;
   }
@@ -53,6 +55,7 @@ function cellClicked(elCell, i, j) {
   } else if (cell.isMarked) {
     unMarkCell(cell);
     updateShown(cell);
+
     elCell.innerHTML = cell.minesAroundCount;
     updateStats();
     return;
@@ -81,6 +84,7 @@ function plantFlag(e, elCell, i, j) {
   } else {
     markCell(cell);
     elCell.innerHTML = FLAG;
+    elCell.classList.add('flagged')
   }
   updateStats();
 }
@@ -93,13 +97,10 @@ function updateStats() {
   var stats = getStats();
   if (stats.time === "null" || !stats.time)
     stats.time = "\n No Winner On This Level Yet";
-  // document.querySelector(".hints span").innerHTML = stats.hintsLeft;
-  // document.querySelector(".lives span").innerHTML = stats.livesLeft;
   document.querySelector(".difficulty").innerHTML = stats.currentLevel;
   document.querySelector(".results").innerHTML = stats.time;
-  // document.querySelector(".safe span").innerHTML = stats.safeClicks;
-  if (!stats.livesLeft) document.querySelector(".icon").innerHTML = SAD;
-  else if (
+  // if (!stats.livesLeft) document.querySelector(".icon").innerHTML = SAD;
+  if (
     stats.shownCount === stats.boardSize - stats.markedCount &&
     stats.markedCount === stats.minesCount
   ) {
@@ -120,6 +121,7 @@ function explodeBombs() {
   });
   elCells.forEach(element => {
     element.innerHTML = BOMB;
+    element.classList.add("exploded");
   });
 }
 
@@ -153,8 +155,13 @@ function restartLevel() {
 /* -------------------------------------------------------------------------- */
 
 function setProperDimensions() {
-  var offsetHeight = document.querySelector(".container").offsetHeight;
-  var offsetWidth = document.querySelector(".container").offsetWidth;
+  var elContainer = document.querySelector(".container");
+  var table = document.querySelector("table");
+  var offsetHeight = elContainer.offsetHeight;
+  var offsetWidth = elContainer.offsetWidth;
+  var level = gGame.currentLevel;
+  if (level === "easy") table.style.fontSize = "2rem";
+  if (level === "expert") table.style.fontSize = "0.6rem";
   document.querySelectorAll("td").forEach(td => {
     td.style.width = offsetWidth / gBoard[0].length + "px";
     td.style.height = offsetHeight / gBoard.length + "px";
@@ -169,7 +176,7 @@ function setProperDimensions() {
 /*            Render Hints To The Game Board, Remove After 1.2 sec            */
 /* -------------------------------------------------------------------------- */
 
-function RenderHints(pos) {
+function displayHints(pos) {
   var negCells = getNegCells(pos);
   var changedElements = [];
   for (var i = 0; i < negCells.length; i++) {

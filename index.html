@@ -6,33 +6,35 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Document</title>
     <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="styles/glow.css" />
+    <link rel="stylesheet" href="styles/Levelglow.css" />
+    <link
+      href="https://fonts.googleapis.com/css?family=Libre+Baskerville&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Lobster&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Lemon&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body onload="onInit()">
     <div class="main">
       <div class="header">
-        <h1>Welcome To Minesweeper</h1>
+        <h1>
+          MineSweeper || By Kosta
+          <img src="/sweeperRedoMvc/images/copyright.png" />
+        </h1>
         <div class="secondHeader">
-          <div class="hints">
-            <span onclick="activateHintMode()" class="hint">💡</span>
-            <span onclick="activateHintMode()" class="hint">💡</span>
-            <span onclick="activateHintMode()" class="hint">💡</span>
-          </div>
-          <button class="safe" onclick="safeClick()">
-            SAFE CLICK
-          </button>
-          <div class="lives">
-            <span  class="hint">❤️</span>
-            <span class="hint">❤️</span>
-            <span  class="hint">❤️</span>
-          </div>
-          <!-- <button class="lives">You Have: <span></span> Lives Left</button> -->
-          <button class="backUp" onclick="stepBack()">
-            <!-- <img src="/sweeperRedoMvc/images/back.png" alt=""> -->
-            StepBack
-          </button>
+          <div class="hints"></div>
+          <div class="lives"></div>
         </div>
+
         <div class="levels">
-          <button class="manual" onclick="manualMode()">
+          <button class="manual level" onclick="manualMode()">
             Manual Mode
           </button>
           <button class="level" onclick="easyMode()">Easy Mode</button>
@@ -42,20 +44,39 @@
       </div>
       <div class="main-Game-Body">
         <!-- <button class="icon" onclick="restartLevel()"></button> -->
-        <div class="bcg-img">
+        <!-- <div class="bcg-img">
           <img
             src="/sweeperRedoMvc/images/uncertain.png"
             class="emoticon uncertain"
           />
           <img src="/sweeperRedoMvc/images/win2.jpg" class="emoticon win" />
           <img src="/sweeperRedoMvc/images/lose3.png" class="emoticon lose" />
+        </div> -->
+        <div class="SideBar">
+          <div class="backUp">
+            <!-- <img src="/sweeperRedoMvc/images/back.png" alt=""> -->
+            <!-- &#128281; -->
+            <img
+              class="stepBack"
+              src="/sweeperRedoMvc/images/back.png"
+              onclick="stepBack()"
+            />
+          </div>
+          <div class="safe">
+            <img
+              class="safeClick"
+              src="/sweeperRedoMvc/images/safeClick.png"
+              onclick="safeClick()"
+            />
+          </div>
         </div>
         <div class="container"></div>
       </div>
       <div class="footer">
-        <div class="timer" onclick="timer()">
-          Your Score: <span class="stopwatch"></span> Best Score At Difficulty
-          <span class="difficulty"></span> is: <span class="results"></span>
+        <div class="timer">
+          Your Score: <span class="stopwatch"></span> <br />
+          Best Score At Difficulty <span class="difficulty"></span> is:
+          <span class="results"></span>
         </div>
       </div>
     </div>

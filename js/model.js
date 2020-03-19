@@ -10,7 +10,7 @@ const NORMAL = "&#128526";
 const WIN = "&#128513";
 const SAD = "&#128555";
 const LOSS = "&#128551";
-const LIGHTBOLB=" &#x1F4A1";
+const LIGHTBOLB = " &#x1F4A1";
 var id = 101;
 
 var gGame = {
@@ -56,7 +56,7 @@ function renderBoard(board) {
     strHtml += "<tr>";
     for (var j = 0; j < board.length; j++) {
       var className = `cell${i}-${j}`;
-      var cell ='';
+      var cell = "";
       strHtml += `<td class="${className}" onclick="cellClicked(this,${i},${j})" oncontextmenu="plantFlag(event,this,${i},${j})"> ${cell}</td>`;
     }
     strHtml += "</tr>";
@@ -66,7 +66,94 @@ function renderBoard(board) {
   gGame["gameBoard"] = board;
 }
 
-/* ------------------------------ Creat A Cell ------------------------------ */
+/* -------------------------------------------------------------------------- */
+/*                           Render Lives And Hints                           */
+/* -------------------------------------------------------------------------- */
+
+function renderLives() {
+  var lives = document.querySelector(".lives");
+  var strHtml = "";
+  if (gGame.lives === 3) {
+    strHtml += `<span  class="life life1">❤️</span>`;
+    strHtml += `<span  class="life life2">❤️</span>`;
+    strHtml += `<span  class="life life3">❤️</span>`;
+  }
+  if (gGame.lives === 2) {
+    strHtml += `<span  class="life life1">🖤</span>`;
+    strHtml += `<span  class="life life2">❤️</span>`;
+    strHtml += `<span  class="life life3">❤️</span>`;
+  }
+  if (gGame.lives === 1) {
+    strHtml += `<span  class="life life1">🖤</span>`;
+    strHtml += `<span  class="life life2">🖤</span>`;
+    strHtml += `<span  class="life life3">❤️</span>`;
+  }
+  if (!gGame.lives) {
+    strHtml += `<span  class="life life1">🖤</span>`;
+    strHtml += `<span  class="life life2">🖤</span>`;
+    strHtml += `<span  class="life life3">🖤</span>`;
+  }
+  lives.innerHTML = "";
+  lives.innerHTML = strHtml;
+}
+
+// function renderHints() {
+//   var hints = document.querySelector(".hints");
+//   var strHtml = "";
+//   if (gGame.hints === 3) {
+//     strHtml += '<span onclick="activateHintMode()" class="hint1">💡</span>';
+//     strHtml += '<span onclick="activateHintMode()" class="hint2">💡</span>';
+//     strHtml += '<span onclick="activateHintMode()" class="hint3">💡</span>';
+//   }
+//   if (gGame.hints === 2) {
+//     strHtml += '<span class="hint1">🔒</span>';
+//     strHtml += '<span onclick="activateHintMode()" class="hint2">💡</span>';
+//     strHtml += '<span onclick="activateHintMode()" class="hint3">💡</span>';
+//   }
+//   if (gGame.hints === 1) {
+//     strHtml += '<span class="hint1">🔒</span>';
+//     strHtml += '<span class="hint2">🔒</span>';
+//     strHtml += '<span onclick="activateHintMode()" class="hint3">💡</span>';
+//   }
+//   if (!gGame.hints) {
+//     strHtml += '<span class="hint1">🔒</span>';
+//     strHtml += '<span class="hint2">🔒</span>';
+//     strHtml += '<span class="hint3">🔒</span>';
+//   }
+//   hints.innerHTML = "";
+//   hints.innerHTML = strHtml;
+// }
+
+function renderHints(elCell) {
+  var hints = document.querySelector(".hints");
+  var strHtml = "";
+  if (gGame.hints === 3) {
+    strHtml += '<span onclick="activateHintMode()" class="hint1">💡</span>';
+    strHtml += '<span onclick="activateHintMode()" class="hint2">💡</span>';
+    strHtml += '<span onclick="activateHintMode()" class="hint3">💡</span>';
+  }
+  if (gGame.hints === 2) {
+    strHtml += '<span class="hint1">🔒</span>';
+    strHtml += '<span onclick="activateHintMode()" class="hint2">💡</span>';
+    strHtml += '<span onclick="activateHintMode()" class="hint3">💡</span>';
+  }
+  if (gGame.hints === 1) {
+    strHtml += '<span class="hint1">🔒</span>';
+    strHtml += '<span class="hint2">🔒</span>';
+    strHtml += '<span onclick="activateHintMode()" class="hint3">💡</span>';
+  }
+  if (!gGame.hints) {
+    strHtml += '<span class="hint1">🔒</span>';
+    strHtml += '<span class="hint2">🔒</span>';
+    strHtml += '<span class="hint3">🔒</span>';
+  }
+  hints.innerHTML = "";
+  hints.innerHTML = strHtml;
+}
+
+
+
+// /* ------------------------------ Creat A Cell ------------------------------ */
 
 function creatCell(i, j) {
   return {
@@ -135,7 +222,6 @@ function minedNeighborsOfCell(board, posI, posJ) {
 
 /* ---------------- Skip the clicked cell while adding mines ------------------ */
 /* ------------- Prevent mines from being placed on top each other ------------ */
-/* ------------ push the random mines cells to an array and return it --------- */
 
 function addMines(board, i, j) {
   var minedCells = [];
@@ -159,16 +245,43 @@ function updateLivesHintsCount() {}
 
 function ReduceLives() {
   gGame.lives--;
+  renderLives();
 }
+
+// function renderBlackHearts() {
+//   var life1 = document.querySelector(".life1");
+//   var life2 = document.querySelector(".life2");
+//   var life3 = document.querySelector(".life3");
+//   if (gGame.lives === 2) life1.innerHTML = "&#128420;";
+//   if (gGame.lives === 1) life2.innerHTML = "&#128420;";
+//   if (!gGame.lives) life3.innerHTML = "&#128420;";
+// }
+
 function reduceHints() {
   gGame.hints--;
+  debugger
+  renderHints();
 }
+
+function breakLight() {
+  var hint1 = document.querySelector(".hint1");
+  var hint2 = document.querySelector(".hint2");
+  var hint3 = document.querySelector(".hint3");
+  if (gGame.hints === 2) hideLight(hint1);
+  if (gGame.hints === 1) hideLight(hint2);
+  if (!gGame.hints) hideLight(hint3);
+}
+
+function hideLight(elHint) {
+  elHint.style.visibility = "hidden";
+  elHint.removeAttribute("onclick");
+}
+
 function activateHintMode() {
   var cell = getSafeCell();
-  // saveStep();
-  if (!gGame.hints||!cell) return;
+  reduceHints();
+  if (!cell) return;
   gGame.hintMode = true;
-  gGame.hints--;
   var elCell = getElementByCell(cell);
   blinkCell(elCell);
 }
@@ -197,8 +310,10 @@ function unMarkCell(cell) {
   gGame.markedCount--;
 }
 function updateShown(cell) {
+  var elCell=getElementByCell(cell)
   cell.isShown = true;
   gGame.shownCount++;
+  elCell.classList.add('open')
 }
 function unShowCell(cell) {
   cell.isShown = false;
@@ -346,8 +461,7 @@ function gameOver() {
   gGame.isOn = false;
   stopwatch.stop();
   updateBestScore(time);
-  updateGlobalBestScores()
-  // updateStats()
+  updateGlobalBestScores();
 }
 
 /* ------------------------ Return The Watch Element ------------------------ */
@@ -380,7 +494,7 @@ function getClassName(location) {
 function updateBestScore(time) {
   var level = gGame.currentLevel;
   var currentBestScore = localStorage.getItem(level);
-  if (currentBestScore === "null"||!currentBestScore) {
+  if (currentBestScore === "null" || !currentBestScore) {
     currentBestScore = "00:00:00";
   }
   if (time > currentBestScore) {
@@ -419,16 +533,12 @@ function getSafeCell() {
   else return cell[0];
 }
 
- 
-
 function getElementPos(elCell) {
   var className = elCell.className;
   var posI = className.splice(4, className.lastIndexOf("-"));
   var posI = className.splice(className.lastIndexOf("-"));
   return { i: posI, j: posJ };
 }
-
-
 
 function getElementByCell(cell) {
   return document.querySelector(`.cell${cell.i}-${cell.j}`);
@@ -462,6 +572,8 @@ function stepBack() {
   table.remove();
   document.querySelector(".container").appendChild(gGame.gameBoard);
   updateStats();
+  renderLives();
+  renderHints();
   if (gGame.isFirstClick) stopwatch.restart();
 }
 
@@ -473,10 +585,10 @@ function safeClick() {
   if (!gGame.safeClicks) return;
   gGame.safeClicks--;
   var cell = getSafeCell();
-  if(!cell) return;
+  if (!cell) return;
   var elCell = getElementByCell(cell);
   blinkCell(elCell);
-  updateStats()
+  updateStats();
 }
 
 /* -------------------------------------------------------------------------- */
@@ -497,9 +609,8 @@ function setMineManualMode(cell, elCell) {
   cell.isMine = true;
   gGame.numOfMinesToSet--;
   elCell.innerHTML = BOMB;
-  elMinesInManualMode.push(elCell) + stopwatch.reset();
+  elMinesInManualMode.push(elCell) + stopwatch.stop();
 }
-
 
 function startGameManual() {
   //making  sure that function FirstClick is not executed
