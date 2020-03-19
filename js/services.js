@@ -160,8 +160,7 @@ function setProperDimensions() {
   var offsetHeight = elContainer.offsetHeight;
   var offsetWidth = elContainer.offsetWidth;
   var level = gGame.currentLevel;
-  if (level === "easy") table.style.fontSize = "4rem";
-  if (level === "hard") table.style.fontSize = "1.2rem";
+  if (level === "easy") table.style.fontSize = "2rem";
   if (level === "expert") table.style.fontSize = "0.6rem";
   document.querySelectorAll("td").forEach(td => {
     td.style.width = offsetWidth / gBoard[0].length + "px";
