@@ -167,6 +167,14 @@ table{
 .hide {
   display: none;
 }
+.progressBar{
+  position: absolute;
+}
+/* .timer{
+  position: absolute;
+} */
+
+
 
 /* For Every Clickable Element, For Future Use */
 

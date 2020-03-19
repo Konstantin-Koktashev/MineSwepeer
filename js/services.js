@@ -27,6 +27,7 @@ function cellClicked(elCell, i, j) {
     setMineManualMode(cell, elCell);
     if (!gGame.numOfMinesToSet) {
       startGameManual();
+      DisableClicks()
       return;
     }
   }

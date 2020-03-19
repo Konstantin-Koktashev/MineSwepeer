@@ -618,6 +618,7 @@ function startGameManual() {
   gGame.isOn = true;
   setMinesCount(gBoard);
   deactivateManualMode();
+  
   setTimeout(() => {
     elMinesInManualMode.forEach(element => (element.innerHTML = ""));
   }, 3000);
@@ -625,4 +626,40 @@ function startGameManual() {
     stopwatch.restart();
   }, 3000);
   document.querySelector(".manual").removeAttribute("onclick");
+  document.querySelector('.timer').classList.add('hide')
+  debugger
+  document.querySelector('.progressBar').classList.remove('hide')
+  countDownTimer()
+  setTimeout(() => {
+    document.querySelector('.timer').classList.remove('hide')
+    document.querySelector('.progressBar').classList.add('hide')
+  }, 3000);
+
+}
+
+function countDownTimer(){
+  var timeleft = 3;
+var downloadTimer = setInterval(function(){
+  if(timeleft <= 0){
+    clearInterval(downloadTimer);
+  }
+  document.querySelector(".progressBar").innerHTML=`Game Will Start In ${timeleft} Seconds`
+  timeleft -= 1;
+}, 1000);
+}
+
+/* -------------------------------------------------------------------------- */
+/*                           Disable Clicks On Body                           */
+/* -------------------------------------------------------------------------- */
+
+function DisableClicks(){
+  document.addEventListener("click",handler,true);
+  setTimeout(() => {
+    document.removeEventListener("click",handler,true);
+  }, 3000);
+}
+
+function handler(e){
+    e.stopPropagation();
+    e.preventDefault();
 }
