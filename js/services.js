@@ -8,10 +8,10 @@ function onInit() {
   renderBoard(gBoard);
   renderLives();
   renderHints();
-  setProperDimensions();
   updateStats();
   updateGlobalBestScores();
   saveStep();
+  setProperDimensions();
 }
 
 /* -------------------------------------------------------------------------- */
@@ -20,6 +20,7 @@ function onInit() {
 
 function cellClicked(elCell, i, j) {
   saveStep();
+  var table=document.querySelector('tbody')
   var cell = gBoard[i][j];
   var pos = { i: i, j: j };
   var isHintMode = checkHintMode();
@@ -48,6 +49,10 @@ function cellClicked(elCell, i, j) {
     return;
   }
   if (cell.isMine) {
+    table.classList.add('shake-hard')
+    setTimeout(() => {
+      table.classList.remove('shake-hard')
+    }, 300);
     ReduceLives();
     if (!getStats().livesLeft) {
       explodeBombs();
@@ -97,18 +102,18 @@ function plantFlag(e, elCell, i, j) {
 function updateStats() {
   var stats = getStats();
   if (stats.time === "null" || !stats.time)
-    stats.time = "\n No Winner On This Level Yet";
+    stats.time = "<br> No Winner On This Level Yet";
   document.querySelector(".difficulty").innerHTML = stats.currentLevel;
   document.querySelector(".results").innerHTML = stats.time;
-  // if (!stats.livesLeft) document.querySelector(".icon").innerHTML = SAD;
-  if (
+  if (!stats.livesLeft) document.querySelector(".icon").innerHTML = SAD;
+ else  if (
     stats.shownCount === stats.boardSize - stats.markedCount &&
     stats.markedCount === stats.minesCount
   ) {
-    // document.querySelector(".icon").innerHTML = WIN;
+    document.querySelector(".icon").innerHTML = WIN;
     gameOver();
   }
-  // else document.querySelector(".icon").innerHTML = NORMAL;
+  else document.querySelector(".icon").innerHTML = NORMAL;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -156,20 +161,16 @@ function restartLevel() {
 /* -------------------------------------------------------------------------- */
 
 function setProperDimensions() {
-  var elContainer = document.querySelector(".container");
-  var table = document.querySelector("table");
+  var elContainer = document.querySelector(".theBody");
+  var table = document.querySelector(".container");
   var offsetHeight = elContainer.offsetHeight;
-  var offsetWidth = elContainer.offsetWidth;
+  var offsetWidth = table.offsetWidth;
   var level = gGame.currentLevel;
   if (level === "easy") table.style.fontSize = "2rem";
   if (level === "expert") table.style.fontSize = "0.6rem";
   document.querySelectorAll("td").forEach(td => {
-    td.style.width = offsetWidth / gBoard[0].length + "px";
-    td.style.height = offsetHeight / gBoard.length + "px";
-  });
-  document.querySelectorAll(".emoticon").forEach(emoticon => {
-    emoticon.height = offsetHeight + "px";
-    emoticon.width = offsetWidth + "px";
+    td.style.width = offsetWidth / (gBoard[0].length-1) + "px";
+    td.style.height = offsetHeight / (gBoard.length-1) + "px";
   });
 }
 
@@ -179,7 +180,7 @@ function setProperDimensions() {
 
 function displayHints(pos) {
   var negCells = getNegCells(pos);
-  var changedElements = [];
+  var elements = [];
   for (var i = 0; i < negCells.length; i++) {
     var currCell = negCells[i];
     var cellPos = { i: currCell.i, j: currCell.j };
@@ -188,10 +189,11 @@ function displayHints(pos) {
     if (elCell.innerText !== "") continue;
     if (currCell.isMine) elCell.innerHTML = BOMB;
     else elCell.innerHTML = currCell.minesAroundCount;
-    changedElements.push(elCell);
+    elements.push(elCell);
   }
+  elements.forEach(element=>element.classList.add('open'))
   setTimeout(() => {
-    removeHints(changedElements);
+    removeHints(elements);
   }, 1200);
 }
 
@@ -201,11 +203,13 @@ function displayHints(pos) {
 
 function removeHints(elements) {
   elements.forEach(element => (element.innerText = ""));
+  elements.forEach(element=>element.classList.remove('open'))
+
 }
 
 function blinkCell(elCell) {
   elCell.classList.add("blinking");
   setTimeout(() => {
     elCell.classList.remove("blinking");
-  }, 2200);
+  }, 1800);
 }

@@ -4,12 +4,19 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Document</title>
-    <link rel="stylesheet" href="style.css" />
+    <title>Mine Sweeper</title>
+    <link rel="stylesheet" href="styles/style.css" />
     <link rel="stylesheet" href="styles/glow.css" />
     <link rel="stylesheet" href="styles/Levelglow.css" />
+    <link rel="stylesheet" href="styles/shake.css">
+    <link rel="stylesheet" href="styles/animate.css">
     <link
       href="https://fonts.googleapis.com/css?family=Libre+Baskerville&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Indie+Flower&display=swap"
       rel="stylesheet"
     />
     <link
@@ -23,48 +30,66 @@
   </head>
   <body onload="onInit()">
     <div class="main">
-      <div class="header">
-        <h1>
-          MineSweeper || By Kosta
-          <a class="copyright" href="https://en.wikipedia.org/wiki/Copyright">
-            <img href src="images/copyright.png" />
-          </a>
-        </h1>
-        <div class="secondHeader">
-          <div class="hints"></div>
-          <div class="lives"></div>
-        </div>
-
-        <div class="levels">
-          <button class="manual level" onclick="manualMode()">
-            Manual Mode
-          </button>
-          <button class="level" onclick="easyMode()">Easy Mode</button>
-          <button class="level" onclick="hardMode()">Hard Mode</button>
-          <button class="level" onclick="expertMode()">EXPERT</button>
-        </div>
-      </div>
-      <div class="main-Game-Body">
-        <div class="SideBar">
-          <div class="backUp">
-            <img class="stepBack" src="images/back.png" onclick="stepBack()" />
+      <div class="theHeader">
+        <div class="header">
+          <h1>
+            MineSweeper || By Kosta
+            <a
+              class="copyright"
+              href="https://en.wikipedia.org/wiki/Copyright"
+              target="_blank"
+            >
+              ©️
+            </a>
+          </h1>
+          <div class="lives-hints">
+            <div class="hints"></div>
+            <div class="game-Smiley">
+              <span class="icon" onclick="restartLevel()"></span></span>
+            </div>
+            <div class="lives"></div>
           </div>
-          <div class="safe">
-            <img
-              class="safeClick"
-              src="images/safeClick.png"
-              onclick="safeClick()"
-            />
+          <div class="levels">
+            <button class="manual level" onclick="manualMode()">
+              Manual Mode
+            </button>
+            <button class="level" onclick="easyMode()">Easy Mode</button>
+            <button class="level" onclick="hardMode()">Hard Mode</button>
+            <button class="level" onclick="expertMode()">EXPERT</button>
           </div>
         </div>
-        <div class="container"></div>
       </div>
-      <div class="footer">
-        <div class="progressBar hide"></div>
-        <div class="timer">
-          Your Score: <span class="stopwatch"></span> <br />
-          Best Score At Difficulty <span class="difficulty"></span> is:
-          <span class="results"></span>
+      <div class="theBody">
+        <div class="main-Game-Body">
+          <div class="SideBar">
+            <div class="images">
+              <div class="backUp">
+                <img
+                  class="stepBack"
+                  src="images/back.png"
+                  onclick="stepBack()"
+                />
+              </div>
+              <div class="safe">
+                <img
+                  class="safeClick"
+                  src="images/safeClick.png"
+                  onclick="safeClick()"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="container"></div>
+        </div>
+      </div>
+      <div class="theFooter">
+        <div class="footer">
+          <div class="progressBar "></div>
+          <div class="timer">
+            Your Score: <span class="stopwatch"></span> <br />
+            Best Score At Difficulty <span class="difficulty"></span> is:
+            <span class="results"></span>
+          </div>
         </div>
       </div>
     </div>

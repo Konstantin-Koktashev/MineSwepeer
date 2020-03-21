@@ -124,28 +124,28 @@ function renderLives() {
 //   hints.innerHTML = strHtml;
 // }
 
-function renderHints(elCell) {
+function renderHints() {
   var hints = document.querySelector(".hints");
   var strHtml = "";
   if (gGame.hints === 3) {
-    strHtml += '<span onclick="activateHintMode()" class="hint1">💡</span>';
-    strHtml += '<span onclick="activateHintMode()" class="hint2">💡</span>';
-    strHtml += '<span onclick="activateHintMode()" class="hint3">💡</span>';
+    strHtml += '<span onclick="activateHintMode()" class="hint">💡</span>';
+    strHtml += '<span onclick="activateHintMode()" class="hint">💡</span>';
+    strHtml += '<span onclick="activateHintMode()" class="hint">💡</span>';
   }
   if (gGame.hints === 2) {
-    strHtml += '<span class="hint1">🔒</span>';
-    strHtml += '<span onclick="activateHintMode()" class="hint2">💡</span>';
-    strHtml += '<span onclick="activateHintMode()" class="hint3">💡</span>';
+    strHtml += '<span class="hint">🔒</span>';
+    strHtml += '<span onclick="activateHintMode()" class="hint">💡</span>';
+    strHtml += '<span onclick="activateHintMode()" class="hint">💡</span>';
   }
   if (gGame.hints === 1) {
-    strHtml += '<span class="hint1">🔒</span>';
-    strHtml += '<span class="hint2">🔒</span>';
-    strHtml += '<span onclick="activateHintMode()" class="hint3">💡</span>';
+    strHtml += '<span class="hint">🔒</span>';
+    strHtml += '<span class="hint">🔒</span>';
+    strHtml += '<span onclick="activateHintMode()" class="hint">💡</span>';
   }
   if (!gGame.hints) {
-    strHtml += '<span class="hint1">🔒</span>';
-    strHtml += '<span class="hint2">🔒</span>';
-    strHtml += '<span class="hint3">🔒</span>';
+    strHtml += '<span class="hint">🔒</span>';
+    strHtml += '<span class="hint">🔒</span>';
+    strHtml += '<span class="hint">🔒</span>';
   }
   hints.innerHTML = "";
   hints.innerHTML = strHtml;
@@ -360,6 +360,7 @@ function restartGame() {
   gGame.safeClicks = 3;
   document.querySelector(".manual").onclick = manualMode;
   gGameCopy = [];
+  
 }
 
 /* -------------------------------------------------------------------------- */
@@ -618,22 +619,21 @@ function startGameManual() {
   gGame.isOn = true;
   setMinesCount(gBoard);
   deactivateManualMode();
-  
-  setTimeout(() => {
-    elMinesInManualMode.forEach(element => (element.innerHTML = ""));
-  }, 3000);
-  setTimeout(() => {
-    stopwatch.restart();
-  }, 3000);
-  document.querySelector(".manual").removeAttribute("onclick");
-  document.querySelector('.timer').classList.add('hide')
   debugger
   document.querySelector('.progressBar').classList.remove('hide')
   countDownTimer()
   setTimeout(() => {
+    elMinesInManualMode.forEach(element => (element.innerHTML = ""));
+  }, 5000);
+  setTimeout(() => {
+    stopwatch.restart();
+  }, 5000);
+  document.querySelector(".manual").removeAttribute("onclick");
+  document.querySelector('.timer').classList.add('hide')
+  setTimeout(() => {
     document.querySelector('.timer').classList.remove('hide')
     document.querySelector('.progressBar').classList.add('hide')
-  }, 3000);
+  }, 5000);
 
 }
 
@@ -656,7 +656,7 @@ function DisableClicks(){
   document.addEventListener("click",handler,true);
   setTimeout(() => {
     document.removeEventListener("click",handler,true);
-  }, 3000);
+  }, 5000);
 }
 
 function handler(e){

@@ -1,0 +1,170 @@
+* {
+  box-sizing: border-box;
+}
+
+/* npm install --save normalize.css */
+
+
+body {
+  display: flex;
+  margin: 0 !important;
+  padding: 0;
+  background: #ECE9E6;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to left, #FFFFFF, #ECE9E6);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to left, #FFFFFF, #ECE9E6);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background-repeat: no-repeat;
+  text-align: center;
+  height: 100vh;
+  max-height: 100vh;
+
+}
+
+.main {
+/* flex-grow: 1; */
+display: flex;
+flex-direction: column;
+width: 100%;
+}
+
+.theHeader {
+  flex: 4;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+}
+
+h1 {
+  font-family: 'Lemon', cursive;
+  word-spacing: 2vw;
+  letter-spacing: 1vw;
+  font-size:400%; 
+}
+
+.lives-hints {
+  display: flex;
+  font-size: 4vh;
+}
+
+.hints {
+  flex-grow: 1;
+  padding-left: 32%;
+  
+}
+
+.lives {
+  flex-grow: 1;
+  padding-right: 30%;
+}
+
+
+.levels {
+  display: flex;
+  justify-content: center;
+}
+
+.level {
+  background: linear-gradient(to bottom, #7892c2 5%, #476e9e 100%);
+  background-color: #7892c2;
+  border-radius: 28px;
+  border: 1px solid #4e6096;
+  display: inline-block;
+  cursor: pointer;
+  color: #ffffff;
+  font-family: Arial;
+  text-decoration: none;
+  text-shadow: 0px -1px 0px #283966;
+  font-family: 'Lemon', cursive;
+  font-size: 2vh;
+  margin: 1%;
+}
+.hint{
+  margin: 3%;
+  cursor: pointer;
+}
+.icon{
+  cursor: pointer;
+}
+
+.level:hover {
+  background: linear-gradient(to bottom, #476e9e 5%, #7892c2 100%);
+  background-color: #476e9e;
+}
+
+.theBody {
+  flex-grow: 5;
+}
+
+.main-Game-Body{
+  display:flex;
+  flex-direction: row-reverse;
+}
+.container{
+  flex: 2;
+  padding-left: 28%;
+}
+
+table { 
+  border-collapse: collapse; 
+}
+
+.SideBar{
+  display: flex;
+flex-grow: 1;
+align-items: center;
+padding-left: 3%;
+}
+.stepBack{
+  padding-bottom: 50%;
+}
+
+.theFooter {
+  flex-grow: 3;
+  font-family: 'Indie Flower', cursive;
+  font-size: 200%;
+  font-weight: 900;
+  letter-spacing: 1.4vh;
+  word-spacing: 0.8vh;
+}
+
+.blinking {
+  transition: opacity 2s ease-in-out infinite;
+  animation: blinker 1s linear infinite;
+  opacity: 1;
+  background-color: #017474;
+  box-shadow: 0 0 25px 3px rgba(104, 196, 188, 0.8), inset 0 0 0 4px white, inset 0 0 25px 8px white;
+}
+
+@keyframes blinker {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+a[href], input[type='submit'], input[type='image'], label[for], select, img, td, button, .pointer {
+  cursor: pointer;
+}
+
+.glow {
+  -moz-box-shadow: 0 0 5px #fff;
+  -webkit-box-shadow: 0 0 5px #fff;
+  box-shadow: 0px 0px 5px #fff;
+}
+
+a:link {
+  text-decoration: none;
+}
+
+.hide{
+  display: none;
+}

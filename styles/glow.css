@@ -40,6 +40,5 @@ td:hover {
   }
 
   .exploded{
-    /* background-color: #017474; */
     box-shadow: 0 0 25px 3px rgba(104, 196, 188, 0.8), inset 0 0 0 4px red, inset 0 0 25px 8px red;
   }
